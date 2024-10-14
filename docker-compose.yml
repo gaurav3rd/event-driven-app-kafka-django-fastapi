@@ -23,6 +23,8 @@ services:
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
     networks:
       - event-driven-app-network
+    volumes:
+    - /var/run/docker.sock:/var/run/docker.sock
 
   zookeeper:
     container_name: event_driven_zookeeper
