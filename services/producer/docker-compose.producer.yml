@@ -1,0 +1,17 @@
+services:
+  producer-service:
+    container_name: event_driven_producer
+    build:
+      context: .
+    ports:
+      - "7007:30001"
+    env_file:
+      - .env
+    depends_on:
+      - kafka
+    networks:
+      - event-driven-app-network
+
+networks:
+  event-driven-app-network:
+    driver: bridge
