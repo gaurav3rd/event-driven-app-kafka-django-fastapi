@@ -28,12 +28,22 @@ def send_to_topic(topic: str, body: dict) -> bool:
     Returns:
         bool: True if the message was sent successfully, False otherwise.
     """
+    # with get_producer() as producer:
+    #     try:
+    #         producer.send(topic, body)
+
+    #     except Exception:
+    #         return False
+    # return True
+
     producer = get_producer()
 
-    with producer as p:
-        try:
-            p.send(topic, body)
+    try:
+        producer.send(topic, body)
+        producer.flush()
 
-        except Exception:
-            return False
+    except Exception as e:
+        # print(f"======> {e}")
+        return False
+
     return True
