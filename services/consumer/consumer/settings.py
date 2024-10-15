@@ -38,8 +38,14 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "todo",
 ]
+
+INSTALLED_APPS.extend(
+    [
+        "django_celery_beat",
+        "todo",
+    ]
+)
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -124,3 +130,14 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = "/static/"
+
+
+# Celery settings
+REDIS_HOST = config("SETTINGS_REDIS_HOST")
+REDIS_PORT = config("SETTINGS_REDIS_PORT")
+REDIS_BROKER_DB = config("SETTINGS_REDIS_BROKER_DB")
+
+CELERY_BROKER_URL = f"redis://{REDIS_HOST}:{REDIS_PORT}/{REDIS_BROKER_DB}"
+CELERY_TIMEZONE = "Asia/Kathmandu"
+CELERY_RESULT_EXTENDED = True
+CELERY_BEAT_SCHEDULER = "django_celery_beat.schedulers:DatabaseScheduler"
