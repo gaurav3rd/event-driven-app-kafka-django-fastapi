@@ -29,6 +29,14 @@ services:
     volumes:
       - ./:/app
 
+  redis:
+    image: redis
+    container_name: event_driven_redis
+    networks:
+      -  event-driven-app-network
+    env_file:
+      - ./.env
+
 networks:
   event-driven-app-network:
     driver: bridge
