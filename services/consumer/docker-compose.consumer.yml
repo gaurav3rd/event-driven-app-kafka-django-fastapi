@@ -16,7 +16,6 @@ services:
     container_name: event_driven_consumer
     build:
       context: .
-    tty: true
     ports:
       - "7008:20001"
     env_file:
@@ -28,12 +27,36 @@ services:
       - event-driven-app-network
     volumes:
       - ./:/app
+    restart: always
+    tty: true
+    stdin_open: true
 
   redis:
     image: redis
     container_name: event_driven_redis
     networks:
       -  event-driven-app-network
+    env_file:
+      - ./.env
+  
+  celery:
+    env_file:
+      - ./.env
+    restart: always
+    command: celery worker -A consumer -l info
+    container_name: event_driven_celery
+    depends_on:
+      - consumer-service
+      - db
+      - redis
+    networks:
+      - event-driven-app-network
+  
+  celery_beat:
+    container_name: event_driven_celery_beat
+    command: celery -A consumer beat l info
+    networks:
+      - event-driven-app-network
     env_file:
       - ./.env
 

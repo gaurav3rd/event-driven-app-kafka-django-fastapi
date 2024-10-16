@@ -3,7 +3,7 @@ import json
 from kafka import KafkaProducer
 
 
-def get_producer() -> KafkaProducer:
+def get_kafka_producer() -> KafkaProducer:
     """
     Get a Kafka producer instance.
 
@@ -36,7 +36,7 @@ def send_to_topic(topic: str, body: dict) -> bool:
     #         return False
     # return True
 
-    producer = get_producer()
+    producer = get_kafka_producer()
 
     try:
         producer.send(topic, body)
