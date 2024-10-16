@@ -26,3 +26,4 @@ services:
 networks:
   event-driven-app-network:
     driver: bridge
+    external: true
