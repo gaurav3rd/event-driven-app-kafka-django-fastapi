@@ -1,3 +1,14 @@
-from django.shortcuts import render
+from rest_framework.viewsets import ReadOnlyModelViewSet
+from rest_framework import mixins
 
-# Create your views here.
+from .models import Todo
+from .serializers import TodoSerializer
+
+
+class TodoViewset(
+    mixins.UpdateModelMixin,
+    mixins.DestroyModelMixin,
+    ReadOnlyModelViewSet,
+):
+    queryset = Todo.objects.all()
+    serializer_class = TodoSerializer
