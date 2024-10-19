@@ -7,8 +7,8 @@ services:
       - "7007:30001"
     volumes:
       - ./src:/app/src
-    env_file:
-      - .env
+    # env_file:
+    #   - .env
     # depends_on:
     #   - kafka
     networks:
