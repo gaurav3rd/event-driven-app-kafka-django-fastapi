@@ -1,5 +1,5 @@
 import logging
-from celery import shared_task
+from consumer.celery_conf import app as celery_app
 
 from config import get_kafka_consumer
 from .models import Todo
@@ -8,7 +8,7 @@ from .models import Todo
 logging.basicConfig(level=logging.DEBUG)
 
 
-@shared_task
+@celery_app.task
 def populate_todos():
     logging.info("started populate_todos")
 

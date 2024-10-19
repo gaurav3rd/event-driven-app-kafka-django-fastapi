@@ -142,13 +142,3 @@ REST_FRAMEWORK = {
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
     "PAGE_SIZE": 100,
 }
-
-# Celery settings
-REDIS_HOST = config("SETTINGS_REDIS_HOST")
-REDIS_PORT = config("SETTINGS_REDIS_PORT")
-REDIS_BROKER_DB = config("SETTINGS_REDIS_BROKER_DB")
-
-CELERY_BROKER_URL = f"redis://{REDIS_HOST}:{REDIS_PORT}/{REDIS_BROKER_DB}"
-CELERY_TIMEZONE = "Asia/Kathmandu"
-CELERY_RESULT_EXTENDED = True
-CELERY_BEAT_SCHEDULER = "django_celery_beat.schedulers:DatabaseScheduler"
