@@ -10,7 +10,7 @@ The project consists of two primary services:
 - A **FastAPI producer service** responsible for sending new todos to Kafka topics.
 - A **Django consumer service** that consumes those todos from Kafka, and saves to database.
 
->The services are designed to operate _independently_ hence, both of these services can be scale up/down independently.
+>The services are designed to operate _independently_ hence, both of these services can be scaled independently.
 
 ---
 ### Event-Driven Flow
